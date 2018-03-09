@@ -1,0 +1,5 @@
+**/*.iml
+*.json
+**/*.log
+.python-version
+**/.idea
