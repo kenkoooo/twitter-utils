@@ -17,12 +17,12 @@ class Config:
             self.friends_json = config["friends_json"]
             logzero.logfile(config["log"])
 
-    def get_api(self):
+    def get_api(self, sleep_on_rate_limit=True):
         return twitter.Api(consumer_key=self.consumer_key,
                            consumer_secret=self.consumer_secret,
                            access_token_key=self.access_token_key,
                            access_token_secret=self.access_token_secret,
-                           sleep_on_rate_limit=True)
+                           sleep_on_rate_limit=sleep_on_rate_limit)
 
     def get_followers(self) -> List[int]:
         with open(self.followers_json, "r") as f:

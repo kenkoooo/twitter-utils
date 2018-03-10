@@ -8,7 +8,7 @@ from twitterkenkoooo.config import Config
 @click.option("--config", "-c", required=True)
 def main(config: str):
     conf = Config(config)
-    api = conf.get_api()
+    api = conf.get_api(sleep_on_rate_limit=False)
     followers = conf.get_followers()
     friends = conf.get_friends()
 
