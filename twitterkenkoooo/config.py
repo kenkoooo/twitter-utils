@@ -1,6 +1,8 @@
 import json
+from typing import List
 
 import logzero
+import twitter
 
 
 class Config:
@@ -14,3 +16,22 @@ class Config:
             self.followers_json = config["followers_json"]
             self.friends_json = config["friends_json"]
             logzero.logfile(config["log"])
+
+    def get_api(self):
+        return twitter.Api(consumer_key=self.consumer_key,
+                           consumer_secret=self.consumer_secret,
+                           access_token_key=self.access_token_key,
+                           access_token_secret=self.access_token_secret,
+                           sleep_on_rate_limit=True)
+
+    def get_followers(self) -> List[int]:
+        with open(self.followers_json, "r") as f:
+            followers = json.load(f)
+            followers.reverse()
+        return followers
+
+    def get_friends(self) -> List[int]:
+        with open(self.friends_json, "r") as f:
+            friends = json.load(f)
+            friends.reverse()
+        return friends
